@@ -1,0 +1,42 @@
+<div class="min-h-screen bg-amber-50 text-amber-900 flex flex-col p-4 sm:p-6 lg:p-8">
+  <header class="text-center mb-8 border-b-2 border-amber-800/20 pb-4">
+    <h1 class="font-cinzel text-4xl sm:text-5xl md:text-6xl font-bold tracking-wider">Khalid's Conquests</h1>
+    <p class="text-amber-800/80 mt-2 text-lg">An AI-Powered Saga</p>
+  </header>
+
+  <main class="flex-grow container mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <aside class="lg:col-span-1">
+      <app-scenario-selector [disabled]="isLoading()" (scenarioSelected)="onScenarioSelected($event)"></app-scenario-selector>
+    </aside>
+
+    <div class="lg:col-span-2 space-y-8">
+      <div class="bg-amber-100/50 border border-amber-800/20 rounded-lg shadow-lg p-6 min-h-[60vh] flex flex-col justify-center items-center">
+        @if (isLoading()) {
+          <div class="flex flex-col items-center text-center animate-pulse">
+            <svg class="w-12 h-12 mb-4 text-amber-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            <p class="font-cinzel text-xl font-semibold">The sands of time are shifting...</p>
+            <p class="text-amber-800/70 mt-1">Chronicling the epic tale.</p>
+          </div>
+        } @else if (error()) {
+          <div class="text-center text-red-800 bg-red-100 border border-red-300 rounded-lg p-6">
+            <h3 class="font-cinzel text-2xl font-bold mb-2">An Error Occurred</h3>
+            <p>{{ error() }}</p>
+          </div>
+        } @else if (story(); as currentStory) {
+          <app-story-display [story]="currentStory"></app-story-display>
+        } @else {
+          <div class="text-center">
+            <h2 class="font-cinzel text-3xl font-semibold">Begin the Saga</h2>
+            <p class="text-amber-800/70 mt-2 max-w-md mx-auto">Select a legendary campaign from the life of Khalid ibn al-Walid to witness a chapter of his story unfold.</p>
+          </div>
+        }
+      </div>
+      
+      @if (story(); as currentStory) {
+        <app-equipment-display [scenario]="currentStory.title"></app-equipment-display>
+      }
+    </div>
+  </main>
+</div>
