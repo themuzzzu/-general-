@@ -1,42 +1,63 @@
-<div class="min-h-screen bg-amber-50 text-amber-900 flex flex-col p-4 sm:p-6 lg:p-8">
-  <header class="text-center mb-8 border-b-2 border-amber-800/20 pb-4">
-    <h1 class="font-cinzel text-4xl sm:text-5xl md:text-6xl font-bold tracking-wider">Khalid's Conquests</h1>
-    <p class="text-amber-800/80 mt-2 text-lg">An AI-Powered Saga</p>
-  </header>
-
-  <main class="flex-grow container mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
-    <aside class="lg:col-span-1">
-      <app-scenario-selector [disabled]="isLoading()" (scenarioSelected)="onScenarioSelected($event)"></app-scenario-selector>
-    </aside>
-
-    <div class="lg:col-span-2 space-y-8">
-      <div class="bg-amber-100/50 border border-amber-800/20 rounded-lg shadow-lg p-6 min-h-[60vh] flex flex-col justify-center items-center">
-        @if (isLoading()) {
-          <div class="flex flex-col items-center text-center animate-pulse">
-            <svg class="w-12 h-12 mb-4 text-amber-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-            </svg>
-            <p class="font-cinzel text-xl font-semibold">The sands of time are shifting...</p>
-            <p class="text-amber-800/70 mt-1">Chronicling the epic tale.</p>
+<div class="min-h-screen flex flex-col p-4 sm:p-6 lg:p-8">
+  @switch (viewState()) {
+    @case ('menu') {
+      <header class="text-center mb-8 border-b-2 border-amber-500/20 pb-4 animate-fade-in">
+        <h1 class="font-im-fell text-5xl sm:text-6xl md:text-7xl font-bold tracking-wider text-amber-200">Khalid's Conquests</h1>
+        <p class="text-amber-400/80 mt-2 text-xl font-cinzel">An AI-Powered Saga</p>
+      </header>
+      <main class="flex-grow container mx-auto flex justify-center items-center animate-fade-in">
+        <div class="w-full max-w-md">
+          @if(error()) {
+            <div class="text-center text-red-400 bg-red-900/50 border border-red-500/50 rounded-lg p-4 mb-6">
+              <h3 class="font-im-fell text-xl font-bold mb-2">An Error Occurred</h3>
+              <p class="font-cinzel">{{ error() }}</p>
+            </div>
+          }
+          <app-scenario-selector (scenarioSelected)="onScenarioSelected($event)"></app-scenario-selector>
+        </div>
+      </main>
+    }
+    @case ('loading') {
+      <div class="flex-grow flex flex-col justify-center items-center text-center animate-fade-in">
+        <svg class="w-16 h-16 mb-6 text-amber-400 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        <p class="font-cinzel text-2xl text-amber-200 transition-opacity duration-500">{{ loadingText() }}</p>
+      </div>
+    }
+    @case ('briefing') {
+      <main class="flex-grow container mx-auto animate-fade-in">
+        @if (story(); as currentStory) {
+          <div class="mb-6 flex justify-between items-center">
+            <h1 class="font-im-fell text-5xl font-bold text-amber-200">{{ currentStory.title }}</h1>
+            <button (click)="returnToMenu()" class="px-4 py-2 bg-amber-800/50 border border-amber-600/80 rounded-md hover:bg-amber-700/70 focus:outline-none focus:ring-2 focus:ring-amber-500 transition-colors duration-200">
+              <span class="font-im-fell text-lg">Return to Map</span>
+            </button>
           </div>
-        } @else if (error()) {
-          <div class="text-center text-red-800 bg-red-100 border border-red-300 rounded-lg p-6">
-            <h3 class="font-cinzel text-2xl font-bold mb-2">An Error Occurred</h3>
-            <p>{{ error() }}</p>
-          </div>
-        } @else if (story(); as currentStory) {
-          <app-story-display [story]="currentStory"></app-story-display>
-        } @else {
-          <div class="text-center">
-            <h2 class="font-cinzel text-3xl font-semibold">Begin the Saga</h2>
-            <p class="text-amber-800/70 mt-2 max-w-md mx-auto">Select a legendary campaign from the life of Khalid ibn al-Walid to witness a chapter of his story unfold.</p>
+
+          <div class="grid grid-cols-1 xl:grid-cols-5 gap-8">
+            <div class="xl:col-span-3">
+              <app-story-display [story]="currentStory"></app-story-display>
+            </div>
+            <div class="xl:col-span-2 space-y-8">
+               <app-three-d-viewer></app-three-d-viewer>
+               <app-equipment-display [scenario]="currentStory.title"></app-equipment-display>
+            </div>
           </div>
         }
-      </div>
-      
-      @if (story(); as currentStory) {
-        <app-equipment-display [scenario]="currentStory.title"></app-equipment-display>
-      }
-    </div>
-  </main>
+      </main>
+    }
+  }
 </div>
+
+<style>
+  .animate-fade-in {
+    animation: fadeIn 1s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+</style>

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,13 +7,24 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@400;500;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=IM+Fell+English+SC&display=swap');
     body {
-      font-family: 'Inter', sans-serif;
-      background-color: #fdf6e3; /* A parchment-like background */
+      font-family: 'Cinzel', serif;
+      background-color: #1a1a1a;
+      background-image:
+        radial-gradient(at 88% 99%, hsla(35, 68%, 21%, 0.25) 0px, transparent 50%),
+        radial-gradient(at 9% 8%, hsla(35, 68%, 21%, 0.25) 0px, transparent 50%),
+        radial-gradient(at 58% 34%, hsla(35, 68%, 21%, 0.25) 0px, transparent 50%),
+        radial-gradient(at 38% 6%, hsla(35, 68%, 21%, 0.25) 0px, transparent 50%),
+        radial-gradient(at 62% 93%, hsla(35, 68%, 21%, 0.25) 0px, transparent 50%),
+        radial-gradient(at 18% 95%, hsla(35, 68%, 21%, 0.25) 0px, transparent 50%),
+        radial-gradient(at 52% 52%, hsla(35, 68%, 21%, 0.25) 0px, transparent 50%);
     }
     .font-cinzel {
       font-family: 'Cinzel', serif;
+    }
+    .font-im-fell {
+      font-family: 'IM Fell English SC', serif;
     }
   </style>
 <script type="importmap">
@@ -31,12 +41,15 @@
     "@angular/common": "https://next.esm.sh/@angular/common@^21.0.0?external=rxjs",
     "@angular/common/http": "https://next.esm.sh/@angular/common@^21.0.0/http?external=rxjs",
     "@angular/compiler": "https://next.esm.sh/@angular/compiler@^21.0.0?external=rxjs",
-    "@google/genai": "https://next.esm.sh/@google/genai@^1.30.0?external=rxjs"
+    "@google/genai": "https://next.esm.sh/@google/genai@^1.30.0?external=rxjs",
+    "three": "https://aistudiocdn.com/three@^0.166.1",
+    "three/addons/": "https://aistudiocdn.com/three@^0.166.1/examples/jsm/",
+    "three/addons/controls/OrbitControls.js": "https://next.esm.sh/three@^0.181.2/addons/controls/OrbitControls.js?external=rxjs"
   }
 }
 </script>
 </head>
-<body class="bg-amber-50 antialiased">
+<body class="bg-stone-900 text-amber-50 antialiased">
   <app-root></app-root>
 </body>
 </html>

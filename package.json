@@ -1,5 +1,5 @@
 {
-  "name": "copy-of-khalid's-conquests:-an-ai-saga",
+  "name": "khalid's-conquests:-an-ai-saga",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -15,6 +15,7 @@
     "@angular/common": "^21.0.0",
     "@angular/compiler": "^21.0.0",
     "@google/genai": "^1.30.0",
+    "three": "^0.166.1",
     "@angular/build": "^21.0.0",
     "@angular/cli": "^21.0.0",
     "@angular/compiler-cli": "^21.0.0",

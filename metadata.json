@@ -1,5 +1,5 @@
 {
-  "name": "Copy of Khalid's Conquests: An AI Saga",
-  "description": "An interactive story generator that brings to life the legendary campaigns of Khalid ibn al-Walid. Select a historical scenario and watch as AI generates an epic tale and a unique piece of art, in the style of classic historical games.",
+  "name": "Khalid's Conquests: An AI Saga",
+  "description": "An interactive, game-like experience that brings to life the legendary campaigns of Khalid ibn al-Walid. Select a historical scenario to receive your mission briefing, inspect your arsenal, and view a 3D artifact from the era, all powered by AI.",
   "requestFramePermissions": []
 }
